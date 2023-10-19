@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        background-color: #dafffb;
+        background-size: cover;
+
+        text-align: center;
+      }
+
+      .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #64ccc5;
+        padding: 20px;
+        border-radius: 40px;
+      }
+
+      .form-label {
+        display: block;
+        color: #04364a;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        margin-top: 10px;
+        text-align: left;
+      }
+
+      .form-input {
+        width: 95%;
+        align-items: center;
+        padding: 10px;
+        margin: 5px 0;
+        background-color: #dafffb;
+        border: 1px solid #176b87;
+        display: flex;
+
+        border-radius: 20px;
+      }
+
+      .form-button {
+        background-color: #04364a;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        color: #dafffb;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 20px;
+        margin-right: 20px;
+        margin-left: 20px;
+        border-radius: 50px;
+        cursor: pointer;
+      }
+      .form-checkbox-item {
+        margin-left: 50px;
+      }
+      h2 {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        font-weight: 600;
+        color: #04364a;
+      }
+      input[type="checkbox"] {
+        margin: -100px 0;
+        line-height: 0%;
+        width: 25px;
+        height: 25px;
+        color: #dafffb;
+        font-size: larger;
+      }
+      .checkbox-label {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 0px;
+      }
+
+      .larger-label {
+        font-size: 20px;
+
+        margin-bottom: 0px;
+        margin-left: 30px;
+        margin-right: 60px;
+        color: #04364a;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>SURVEY FORM</h2>
+      <form id="survey-form">
+        <label for="first-name" class="form-label">FIRST NAME:</label>
+        <input type="text" id="first-name" class="form-input" required />
+
+        <label for="last-name" class="form-label">LAST NAME:</label>
+        <input type="text" id="last-name" class="form-input" required />
+
+        <label for="dob" class="form-label">DATE OF BIRTH:</label>
+        <input type="date" id="dob" class="form-input" required />
+        <label for="email" class="form-label">EMAIL:</label>
+        <input type="email" id="email" class="form-input" required />
+
+        <label for="mobile" class="form-label">MOBILE NUMBER:</label>
+        <input type="tel" id="mobile" class="form-input" required />
+
+        <label for="profession" class="form-label">PROFESSION:</label>
+        <input type="text" id="profession" class="form-input" required />
+
+        <label for="country" class="form-label">COUNTRY:</label>
+        <select id="country" class="form-input" required>
+          <option value="">SELECT COUNTRY</option>
+          <option value="us">United States</option>
+          <option value="ca">Canada</option>
+          <option value="uk">United Kingdom</option>
+        </select>
+
+        <label for="gender" class="form-label">GENDER:</label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="male" name="gender" value="male" />
+          <span class="larger-label">Male</span>
+        </label>
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="female" name="gender" value="female" />
+          <span class="larger-label">Female</span>
+        </label>
+
+        <button type="button" class="form-button" onclick="submitForm()">
+          SUBMIT
+        </button>
+        <button type="button" class="form-button" onclick="resetForm()">
+          RESET
+        </button>
+      </form>
+    </div>
+
+    <script>
+      function submitForm() {
+        const form = document.getElementById("survey-form");
+        const popup = document.getElementById("popup");
+        const popupContent = document.getElementById("popup-content");
+
+        if (form.checkValidity()) {
+          const formData = new FormData(form);
+          let result = "Survey Results:\n\n";
+
+          formData.forEach((value, key) => {
+            if (value) {
+              result += `${key}: ${value}\n`;
+            }
+          });
+
+          popupContent.textContent = result;
+          popup.style.display = "block";
+        } else {
+          alert("Please fill out all required fields.");
+        }
+      }
+
+      function resetForm() {
+        const form = document.getElementById("survey-form");
+        form.reset();
+      }
+
+      function closePopup() {
+        const popup = document.getElementById("popup");
+        popup.style.display = "none";
+        resetForm();
+      }
+    </script>
+  </body>
+</html>

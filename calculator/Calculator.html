@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      #calculator {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 200px;
+        text-align: right;
+      }
+
+      #display {
+        width: 100%;
+        height: 40px;
+        border: none;
+        background-color: transparent;
+        color: rgb(11, 3, 3);
+        font-size: 20px;
+        text-align: right;
+        padding-right: 10px;
+        outline: none;
+      }
+      .Acbutton {
+        background-color: #00b66a;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .numbutton {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        background-color: #000;
+        color: white;
+        align-items: center;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      #buttons {
+        display: grid;
+        object-fit: fill;
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .button {
+        background-color: #4e4e4e;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: #999;
+      }
+      .numbutton:hover {
+        background-color: #00b66a;
+      }
+
+      .equals {
+        background-color: #22c724;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="calculator">
+      <input id="display" type="text" readonly />
+      <button class="Acbutton" onclick="clearDisplay()">AC</button>
+      <div id="buttons">
+        <button class="numbutton" onclick="appendCharacter('9')">9</button>
+        <button class="numbutton" onclick="appendCharacter('8')">8</button>
+        <button class="numbutton" onclick="appendCharacter('7')">7</button>
+        <button class="button" onclick="appendCharacter('+')">+</button>
+
+        <button class="numbutton" onclick="appendCharacter('6')">6</button>
+        <button class="numbutton" onclick="appendCharacter('5')">5</button>
+        <button class="numbutton" onclick="appendCharacter('4')">4</button>
+        <button class="button" onclick="appendCharacter('-')">-</button>
+
+        <button class="numbutton" onclick="appendCharacter('3')">3</button>
+        <button class="numbutton" onclick="appendCharacter('2')">2</button>
+        <button class="numbutton" onclick="appendCharacter('1')">1</button>
+        <button class="button" onclick="appendCharacter('*')">*</button>
+
+        <button class="numbutton" onclick="appendCharacter('.')">.</button>
+        <button class="numbutton" onclick="appendCharacter('0')">0</button>
+        <button class="numbutton" onclick="calculateResult ('=')">=</button>
+        <button class="button" onclick="appendCharacter('/')">/</button>
+      </div>
+    </div>
+
+    <script>
+      let currentInput = "";
+
+      function clearDisplay() {
+        currentInput = "";
+        updateDisplay();
+      }
+
+      function appendCharacter(character) {
+        currentInput += character;
+        updateDisplay();
+      }
+
+      function calculateResult() {
+        try {
+          currentInput = eval(currentInput);
+          updateDisplay();
+        } catch (error) {
+          currentInput = "Error";
+          updateDisplay();
+        }
+      }
+
+      function updateDisplay() {
+        document.getElementById("display").value = currentInput;
+      }
+    </script>
+  </body>
+</html>
